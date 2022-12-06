@@ -10,17 +10,36 @@ document.querySelector('form').addEventListener('submit', function(event){
   
   // add item entered to items array
   items.push(input.value);
-  console.log(items);
   
   // clear the input box
   input.value = "";
 
-  // display items added to a list
-  const todoList = items.map(item =>
-    `
-      <li>${item}</li>
-    `
-    )
-    ul.innerHTML = todoList.join('')
+  // function display items added to a list
+  showItems();
+ 
+});
+const showItems = () => {
+  const todoList = items.map((item, index) =>
+  `
+    <li><input type="checkbox" data-index="${index}" id="done"/>${item}  <button data-index="${index}" id="delete">x</button></li> 
+  `
+  )
+  ul.innerHTML = todoList.join('');
+}
 
+// event listener for button click
+ul.addEventListener('click', function(event){
+  
+  if(event.target.matches('input')){
+    const checkIndex = event.target.dataset.index;
+    let checkbox = document.querySelector("done");
+    checkbox = true;
+    console.log(checkIndex + ' checkbox clicked');   
+
+  } else if(event.target.matches('#delete')){
+    const buttonIndex = event.target.dataset.index 
+    console.log(items[buttonIndex]);
+    items.splice(buttonIndex,1);
+  }
+  showItems()
 });
