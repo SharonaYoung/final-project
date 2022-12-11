@@ -25,8 +25,6 @@ const showItems = () => {
   ul.innerHTML = todoList.join('');
 }
 
-
-
 ul.addEventListener('click', function(event){
   const index = event.target.dataset.index;
   // when checkbox is clicked
@@ -34,14 +32,16 @@ ul.addEventListener('click', function(event){
     items[index].complete = !items[index].complete
     console.log(`checkbox clicked for index ${event.target.dataset.index}`);
     
-    // *** only adds to first item, this.querySelectorAll doesn't work ***
-    /* const checkbox = document.querySelector("ul li");
-    checkbox.classList.add("done"); */
-
+    // *** only adds if first item is checked***
+    const checked = document.querySelectorAll("li");
+    
+    if(items[index].complete){
+      checked[index].classList.add('done');
+    }
+  
     // ***does not work***
     // items[index].style.textDecoration('line-through');
     
-
   // when delete buotton clicked
   }else if(event.target.matches('button')){
     console.log(`delete clicked for index  ${event.target.dataset.index}`);

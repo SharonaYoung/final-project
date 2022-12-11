@@ -1,0 +1,10 @@
+ul li {
+  list-style: none;
+}
+li input, li button {
+  margin: .2rem 1rem;
+}
+
+.done{
+  text-decoration: line-through;
+}
